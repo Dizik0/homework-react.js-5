@@ -42,7 +42,6 @@ class AddContact extends Component {
   };
 
   render() {
-    console.log(this.props.contacts);
     const { number, name } = this.state;
     return (
       <form
@@ -85,13 +84,7 @@ class AddContact extends Component {
 }
 
 AddContact.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      name: PropTypes.string,
-      number: PropTypes.string,
-    })
-  ),
+  contacts: PropTypes.object,
   uuidv4: PropTypes.func,
   name: PropTypes.string,
   number: PropTypes.number,

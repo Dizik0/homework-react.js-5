@@ -1,22 +1,27 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
 import style from "./AddContact.module.scss";
-export class AddContact extends Component {
+
+import { connect } from "react-redux";
+import * as actions from "../../redux/contact/contact-action";
+
+class AddContact extends Component {
   state = {
     name: "",
     number: "",
   };
+
   alerError = () => {
-    return this.props.contacts.find(({ name }) => {
+    return this.props.contacts.items.find(({ name }) => {
       return name === this.state.name;
     });
   };
 
-  deleteTodo = (todoId) => {
-    this.setState((prevState) => ({
-      todos: prevState.todos.filter((todo) => todo.id !== todoId),
-    }));
-  };
+  // deleteTodo = (todoId) => {
+  //   this.setState((prevState) => ({
+  //     todos: prevState.todos.filter((todo) => todo.id !== todoId),
+  //   }));
+  // };
 
   submitformContact = (e) => {
     e.preventDefault();
@@ -37,6 +42,7 @@ export class AddContact extends Component {
   };
 
   render() {
+    console.log(this.props.contacts);
     const { number, name } = this.state;
     return (
       <form
@@ -94,3 +100,13 @@ AddContact.propTypes = {
 AddContact.defaultProps = {
   contacts: [],
 };
+
+const mapStateToProps = (state) => ({
+  contacts: state.contact,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  stateTransfer: (value) => dispatch(actions.addContact(value)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddContact);

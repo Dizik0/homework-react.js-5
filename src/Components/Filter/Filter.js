@@ -1,7 +1,12 @@
 import { Component } from "react";
 import PropTypes from "prop-types";
 import style from "./Filter.module.scss";
-export class Filter extends Component {
+
+import { connect } from "react-redux";
+
+import * as actions from "../../redux/contact/contact-action";
+
+class Filter extends Component {
   state = {
     filter: "",
   };
@@ -23,3 +28,13 @@ Filter.propTypes = {
   filterContact: PropTypes.func,
   filter: PropTypes.string,
 };
+
+const mapStateToProps = (state) => ({
+  filter: state.contact.filter,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  filterContact: (e) => dispatch(actions.filterContact(e.target.value)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

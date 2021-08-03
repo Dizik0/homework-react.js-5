@@ -5,6 +5,7 @@ import AddContact from "./Components/AddContact";
 import Filter from "./Components/Filter";
 import ContactList from "./Components/ContactList";
 import style from "./App.module.scss";
+import axios from "axios";
 
 class App extends Component {
   state = {
@@ -13,6 +14,7 @@ class App extends Component {
     // number: "",
     filter: "",
   };
+
   // componentDidUpdate() {
   //   localStorage.setItem("key-1", JSON.stringify(this.state.contacts));
   // }
